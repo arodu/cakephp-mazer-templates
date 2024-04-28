@@ -1,5 +1,5 @@
 {
-    "name": "your-name-here/mazer-templates",
+    "name": "arodu/cakephp-mazer-templates",
     "description": "MazerTemplates plugin for CakePHP",
     "type": "cakephp-plugin",
     "license": "MIT",
