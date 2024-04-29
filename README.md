@@ -1,4 +1,17 @@
-# MazerTemplates plugin for CakePHP
+# Mazer templates plugin for CakePHP
+
+## Getting Started
+
+### Dependencies
+
+- [Mazer Dashboard 2.x](http://zuramai.github.io/mazer), free Bootstrap 5 Admin Dashboard Template.
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/), the world’s most popular front-end open source toolkit.
+- [FriendsOfCake/bootstrap-ui](https://github.com/FriendsOfCake/bootstrap-ui), Transparently use Bootstrap 5 with CakePHP 5.
+
+## Table of contents
+
+- [Installation](#installation)
+- [Configuration](#configuration)
 
 ## Installation
 
