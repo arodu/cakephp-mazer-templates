@@ -1,5 +1,8 @@
 # Mazer templates plugin for CakePHP
 
+> [!WARNING]  
+> This plugin is under development and not ready for production. 
+
 ## Getting Started
 
 ### Dependencies
