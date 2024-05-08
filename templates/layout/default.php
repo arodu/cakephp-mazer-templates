@@ -28,7 +28,6 @@
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </div>
-            <?= $this->element('MazerTemplates.partials/page_title') ?>
             <?= $this->element('MazerTemplates.partials/footer') ?>
         </div>
     </div>
