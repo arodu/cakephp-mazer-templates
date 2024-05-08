@@ -41,11 +41,10 @@ class MazerTemplatesPlugin extends BasePlugin
     {
         $routes->plugin(
             'MazerTemplates',
-            ['path' => '/mazer-templates'],
+            ['path' => '/mazer'],
             function (RouteBuilder $builder) {
                 // Add custom routes here
-
-                $builder->fallbacks();
+                $builder->connect('/debug', ['controller' => 'Pages', 'action' => 'debug']);
             }
         );
         parent::routes($routes);
