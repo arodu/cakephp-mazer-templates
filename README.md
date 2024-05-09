@@ -34,4 +34,5 @@ You can load the plugin using the shell command:
 
 ```bash
 bin/cake plugin load MazerTemplates
+bin/cake plugin load BootstrapUI
 ```
