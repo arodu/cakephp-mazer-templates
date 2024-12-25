@@ -1,0 +1,59 @@
+{% set fields = Bake.filterFields(fields, schema, modelObject) %}
+<div class="card form {{ pluralVar }}">
+    <div class="card-header d-flex">
+        <h4 class="card-title">
+            <?= $this->Html->link('<i class="bi bi-caret-left-fill"></i>', $redirect ?? ['action' => 'index'], ['escape' => false]) ?>
+            <?= __('{{ action|humanize }} {{ singularHumanName }}') ?>
+        </h4>
+        <div class="ms-auto d-flex gap-1">
+{% if 'add' not in action %}
+            <?= $this->Html->link(__('View {{ singularHumanName }}'), ['action' => 'view', ${{ singularVar }}->{{ primaryKey[0] }}], ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= $this->Form->postLink(
+                __('Delete {{ singularHumanName }}'),
+                ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
+                ['confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}), 'class' => 'btn btn-danger btn-sm']
+            ) ?>
+{% endif %}
+            <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+            {{- "\n" }}
+{%- set done = [] %}
+        </div>
+    </div>
+    <div class="card-body">
+        <?= $this->Form->create(${{ singularVar }}) ?>
+{% for field in fields %}
+{%- if field not in primaryKey %}
+    {%- if keyFields[field] is defined %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.null %}
+        <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'empty' => true]) ?>
+        {{- "\n" }}
+        {%- else %}
+        <?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}]) ?>
+        {{- "\n" }}
+        {%- endif %}
+    {%- elseif field not in ['created', 'modified', 'updated'] %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
+        <?= $this->Form->control('{{ field }}', ['empty' => true]) ?>
+        {{- "\n" }}
+        {%- else %}
+        <?= $this->Form->control('{{ field }}') ?>
+        {{- "\n" }}
+        {%- endif %}
+    {%- endif %}
+{%- endif %}
+{%- endfor %}
+{%- if associations.BelongsToMany is defined %}
+{%- for assocName, assocData in associations.BelongsToMany %}
+        <?= $this->Form->control('{{ assocData.property }}._ids', ['options' => ${{ assocData.variable }}]) ?>
+        {{- "\n" }}
+{%- endfor %}
+{% endif %}
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']) ?>
+            <?= $this->Html->link(__('Cancel'), $redirect ?? ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+        </div>
+        <?= $this->Form->end() ?>
+    </div>
+</div>
