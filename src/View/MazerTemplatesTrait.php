@@ -18,5 +18,6 @@ trait MazerTemplatesTrait
     public function MazerTemplatesInitialize(): void
     {
         $this->initializeUI();
+        $this->loadHelper('MazerTemplates.MazerMenu');
     }
 }
