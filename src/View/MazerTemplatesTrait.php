@@ -22,7 +22,7 @@ trait MazerTemplatesTrait
             'nestClass' => 'has-sub',
             'templates' => [
                 'menu' => '<ul class="menu">{{items}}</ul>',
-                'menuItem' => '<li class="sidebar-item{{class}}">{{text}}{{nest}}</li>',
+                'menuItem' => '<li class="sidebar-item {{class}}">{{text}}{{nest}}</li>',
                 'menuLink' => '<a href="{{url}}" class="sidebar-link">{{icon}}<span>{{text}}</span></a>',
                 'nest' => '<ul class="submenu">{{items}}</ul>',
                 'nestItem' => '<li class="submenu-item {{class}}">{{text}}{{nest}}</li>',
