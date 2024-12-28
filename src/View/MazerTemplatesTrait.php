@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MazerTemplates\View;
@@ -7,6 +8,8 @@ use BootstrapUI\View\UIViewTrait;
 
 /**
  * MazerTemplates trait
+ * @property \BsUtils\View\Helper\MenuHelper $Menu
+ * @property \BsUtils\View\Helper\MenuHelper $MazerMenu
  */
 trait MazerTemplatesTrait
 {
@@ -18,16 +21,28 @@ trait MazerTemplatesTrait
     public function MazerTemplatesInitialize(): void
     {
         $this->initializeUI();
-        $this->loadHelper('BsUtils.Menu', [
-            'nestClass' => 'has-sub',
+
+        $this->loadHelper('BsUtils.Menu');
+        $this->loadHelper('MazerMenu', [
+            'className' => 'BsUtils.Menu',
+            'menuClass' => 'menu',
+            'dropdownClass' => 'has-sub',
             'templates' => [
-                'menu' => '<ul class="menu">{{items}}</ul>',
-                'menuItem' => '<li class="sidebar-item {{class}}">{{text}}{{nest}}</li>',
-                'menuLink' => '<a href="{{url}}" class="sidebar-link">{{icon}}<span>{{text}}</span></a>',
-                'nest' => '<ul class="submenu">{{items}}</ul>',
-                'nestItem' => '<li class="submenu-item {{class}}">{{text}}{{nest}}</li>',
-                'nestLink' => '<a href="{{url}}" class="submenu-link">{{icon}}{{text}}</a>',
+                'menuContainer' => '<ul class="{{menuClass}}">{{items}}</ul>',
+                'menuItem' => '<li class="sidebar-item{{class}}{{activeClass}}{{dropdownClass}}">{{text}}{{nest}}</li>',
+                //'menuItemDisabled' => '<li class="nav-item"><a class="nav-link disabled" aria-disabled="true">{{icon}}{{text}}</a></li>',
+                'menuItemLink' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
+                'menuItemLinkNest' => '<a href="{{url}}" class="sidebar-link">{{icon}}<span>{{text}}</span></a>',
+
+                'dropdownContainer' => '<ul class="submenu">{{items}}</ul>',
+                'dropdownItem' => '<li class="submenu-item{{class}}{{activeClass}}">{{text}}{{nest}}</li>',
+                //'dropdownItemDisabled' => '<li>{{text}}{{nest}}</li>',
+                'dropdownItemLink' => '<a class="submenu-link" href="{{url}}">{{icon}}{{text}}</a>',
+                'dropdownItemLinkNest' => '<a class="submenu-link" href="{{url}}">{{icon}}{{text}}</a>',
+
                 'icon' => '<i class="{{icon}}"></i>',
+                //'divider' => '<li><hr class="dropdown-divider"></li>',
+                'menuTitle' => '<li class="sidebar-item {{class}}">{{text}}{{nest}}</li>',
             ],
         ]);
     }

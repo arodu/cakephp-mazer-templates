@@ -4,57 +4,57 @@
  * @var \App\View\AppView $this
  */
 
-$menu = [
+$mainMenu = [
     [
-        'title' => 'Menu',
-        'type' => 'title',
+        'label' => __('Menu'),
+        'type' => $this->MazerMenu::ITEM_TYPE_TITLE
     ],
     [
-        'title' => 'Dashboard',
+        'label' => __('Dashboard'),
         'url' => [
-            'controller' => 'Projects',
+            'controller' => __('Projects'),
             'action' => 'index',
         ],
         'icon' => 'bi bi-grid-fill',
     ],
     'components' => [
-        'title' => 'Components',
+        'label' => __('Components'),
         'url' => '#',
         'icon' => 'bi bi-stack',
         'children' => [
             'accordion' => [
-                'title' => 'Accordion',
+                'label' => __('Accordion'),
                 'url' => 'component-accordion.html',
             ],
             [
-                'title' => 'Alert',
+                'label' => __('Alert'),
                 'url' => 'component-alert.html',
             ],
         ],
     ],
     [
-        'title' => 'Forms & Tables',
-        'type' => 'title',
+        'label' => __('Forms & Tables'),
+        'type' => $this->MazerMenu::ITEM_TYPE_TITLE
     ],
     [
-        'title' => 'Form Elements',
+        'label' => __('Form Elements'),
         'url' => '#',
         'icon' => 'bi bi-hexagon-fill',
         'children' => [
             [
-                'title' => 'Input',
+                'label' => __('Input'),
                 'url' => 'form-element-input.html',
             ],
             [
-                'title' => 'Checkbox',
+                'label' => __('Checkbox'),
                 //'url' => 'form-element-checkbox.html',
                 'children' => [
                     [
-                        'title' => 'Input',
+                        'label' => __('Input'),
                         'url' => 'form-element-input.html',
                     ],
                     [
-                        'title' => 'Checkbox',
+                        'label' => __('Checkbox'),
                         'url' => 'form-element-checkbox.html',
                     ],
                 ],
@@ -62,10 +62,11 @@ $menu = [
         ],
     ],
 ];
+
+$this->MazerMenu->activeItem('components.accordion');
+
 ?>
 
 <div class="sidebar-menu">
-    <?= $this->Menu->render($menu, [
-        'activeItem' => 'components.accordion',
-    ]) ?>
+    <?= $this->MazerMenu->render($mainMenu) ?>
 </div>

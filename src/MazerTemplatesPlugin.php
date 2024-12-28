@@ -26,6 +26,8 @@ class MazerTemplatesPlugin extends BasePlugin
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
+        $app->addPlugin('BootstrapUI');
+        $app->addPlugin('BsUtils');
     }
 
     /**
