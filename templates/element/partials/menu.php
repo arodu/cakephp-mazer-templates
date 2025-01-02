@@ -61,6 +61,16 @@ $mainMenu = [
             ],
         ],
     ],
+    [
+        'label' => __('Theme'),
+        'url' => '/mazer_templates/mazer/index.html',
+        'icon' => 'bi bi-palette-fill',
+    ],
+    [
+        'label' => __('Fork me on GitHub'),
+        'url' => 'https://github.com/arodu/cakephp-mazer-templates',
+        'icon' => 'bi bi-github',
+    ]
 ];
 
 $this->MazerMenu->activeItem('components.accordion');

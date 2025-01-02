@@ -32,7 +32,7 @@ trait MazerTemplatesTrait
                 'menuItem' => '<li class="sidebar-item{{class}}{{activeClass}}{{dropdownClass}}">{{text}}{{nest}}</li>',
                 //'menuItemDisabled' => '<li class="nav-item"><a class="nav-link disabled" aria-disabled="true">{{icon}}{{text}}</a></li>',
                 'menuItemLink' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
-                'menuItemLinkNest' => '<a href="{{url}}" class="sidebar-link">{{icon}}<span>{{text}}</span></a>',
+                'menuItemLinkNest' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
 
                 'dropdownContainer' => '<ul class="submenu">{{items}}</ul>',
                 'dropdownItem' => '<li class="submenu-item{{class}}{{activeClass}}">{{text}}{{nest}}</li>',
