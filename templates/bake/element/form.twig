@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="card-body">
-        <?= $this->Form->create(${{ singularVar }}) ?>
+        <?= $this->Form->create(${{ singularVar }}, ['valueSources' => ['data', 'query', 'context']]) ?>
 {% for field in fields %}
 {%- if field not in primaryKey %}
     {%- if keyFields[field] is defined %}
