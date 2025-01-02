@@ -18,7 +18,7 @@ $this->Breadcrumbs->add([
         </h4>
         <div class="ms-auto d-flex gap-1">
             <?= $this->Paginator->limitControl([], null, ['label' => false, 'spacing' => 'mb-0', 'class' => 'form-select-sm']) ?>
-            <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= $this->Html->link(__('Add {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
     </div>
     <div class="card-body">
@@ -35,7 +35,7 @@ $this->Breadcrumbs->add([
                 <tbody>
                     <?php if (${{ pluralVar }}->count() === 0): ?>
                         <tr>
-                            <td colspan="{{ fields|length + 1 }}" class="text-muted">
+                            <td colspan="{{ fields|length + 1 }}" class="text-muted text-center">
                                 <?= __('No {{ pluralHumanName }} found') ?>
                             </td>
                         </tr>

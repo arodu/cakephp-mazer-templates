@@ -22,7 +22,7 @@ $this->Breadcrumbs->add([
             <?= $this->Html->link('<i class="bi bi-caret-left-fill"></i>', $redirect ?? ['action' => 'index'], ['escape' => false]) ?>
             <?= __('View {{ singularHumanName }}: {0}', h(${{ singularVar }}->{{ displayField }})) ?>
         </h4>
-        <div class="card-tools ms-auto d-flex gap-1">
+        <div class="ms-auto d-flex gap-1">
             <?= $this->Html->link(
                 __('List {{ pluralHumanName }}'),
                 ['action' => 'index', '?' => ['redirect' => $this->getRequest()->getPath()]],
@@ -39,7 +39,7 @@ $this->Breadcrumbs->add([
                 ['confirm' => __('Are you sure you want to delete {0}?', ${{ singularVar }}->{{ displayField }}), 'class' => 'btn btn-danger btn-sm']
             ) ?>
             <?= $this->Html->link(
-                __('New {{ singularHumanName }}'),
+                __('Add {{ singularHumanName }}'),
                 ['action' => 'add', '?' => ['redirect' => $this->getRequest()->getPath()]],
                 ['class' => 'btn btn-success btn-sm']
             ) ?>
@@ -132,8 +132,93 @@ $this->Breadcrumbs->add([
 {% for alias, details in relations %}
 {% set otherSingularVar = alias|singularize|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
+{% set otherSingularHumanName = alias|singularize|underscore|humanize %}
 
-<div class="related">
+<div class="card related {{ pluralVar }} {{ alias|underscore }}">
+    <div class="card-header d-flex">
+        <h4 class="card-title" id="related-{{ alias|underscore }}">
+            <?= __('Related {{ otherPluralHumanName }}') ?>
+        </h4>
+        <div class="ms-auto d-flex gap-1">
+            <?= $this->Html->link(
+                __('Add {{ otherSingularHumanName }}'),
+                [
+                    'controller' => '{{ details.controller }}',
+                    'action' => 'add',
+                    '?' => [
+                        '{{ singularVar }}_id' => ${{ singularVar }}->{{ primaryKey[0] }},
+                        'redirect' => $this->getRequest()->getPath() . '#related-{{ alias|underscore }}',
+                    ],
+                ],
+                ['class' => 'btn btn-success btn-sm']
+            ) ?>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tr>
+    {% for field in details.fields %}
+                    <th><?= __('{{ field|humanize }}') ?></th>
+    {% endfor %}
+                    <th class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php if (empty(${{ singularVar }}->{{ details.property }})) : ?>
+                    <tr>
+                        <td colspan="{{ details.fields|length + 1 }}" class="text-muted text-center">
+                            <?= __('No {{ otherPluralHumanName }} found') ?>
+                        </td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}) : ?>
+                        <tr>
+{% for field in details.fields %}
+                            <td><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+{% endfor %}
+{% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
+                            <td class="actions">
+                                <?= $this->Html->link(
+                                    __('View'),
+                                    [
+                                        'controller' => '{{ details.controller }}',
+                                        'action' => 'view',
+                                        {{ otherPk|raw }},
+                                        '?' => ['redirect' => $this->getRequest()->getPath() . '#related-{{ alias|underscore }}'],
+                                    ],
+                                    ['class' => 'btn btn-info btn-sm']    
+                                ) ?>
+                                <?= $this->Html->link(
+                                    __('Edit'),
+                                    [
+                                        'controller' => '{{ details.controller }}',
+                                        'action' => 'edit',
+                                        {{ otherPk|raw }},
+                                        '?' => ['redirect' => $this->getRequest()->getPath() . '#related-{{ alias|underscore }}'],
+                                    ],
+                                    ['class' => 'btn btn-warning btn-sm']
+                                ) ?>
+                                <?= $this->Form->postLink(
+                                    __('Delete'),
+                                    [
+                                        'controller' => '{{ details.controller }}',
+                                        'action' => 'delete',
+                                        {{ otherPk|raw }},
+                                        '?' => ['redirect' => $this->getRequest()->getPath() . '#related-{{ alias|underscore }}'],
+                                    ],
+                                    ['confirm' => __('Are you sure you want to delete # {0}?', {{ otherPk|raw }}), 'class' => 'btn btn-danger btn-sm']
+                                ) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+        </div>
+    </div>
+</div>
+{% endfor %}    
+
+
+{#
     <h4><?= __('Related {{ otherPluralHumanName }}') ?></h4>
     <?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
     <div class="table-responsive">
@@ -162,3 +247,5 @@ $this->Breadcrumbs->add([
     <?php endif; ?>
 </div>
 {% endfor %}
+
+#}
