@@ -1,21 +1,28 @@
 {% set fields = Bake.filterFields(fields, schema, modelObject) %}
-<div class="card form {{ pluralVar }}">
+<div class="card form {{ action }} {{ pluralVar }}">
     <div class="card-header d-flex">
         <h4 class="card-title">
             <?= $this->Html->link('<i class="bi bi-caret-left-fill"></i>', $redirect ?? ['action' => 'index'], ['escape' => false]) ?>
             <?= __('{{ action|humanize }} {{ singularHumanName }}') ?>
         </h4>
         <div class="ms-auto d-flex gap-1">
+            <?= $this->Html->link(
+                __('List {{ pluralHumanName }}'),
+                ['action' => 'index'],
+                ['class' => 'btn btn-light btn-sm']
+            ) ?>
 {% if 'add' not in action %}
-            <?= $this->Html->link(__('View {{ singularHumanName }}'), ['action' => 'view', ${{ singularVar }}->{{ primaryKey[0] }}], ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= $this->Html->link(
+                __('View {{ singularHumanName }}'),
+                ['action' => 'view', ${{ singularVar }}->{{ primaryKey[0] }}],
+                ['class' => 'btn btn-info btn-sm']
+            ) ?>
             <?= $this->Form->postLink(
                 __('Delete {{ singularHumanName }}'),
                 ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
                 ['confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}), 'class' => 'btn btn-danger btn-sm']
             ) ?>
 {% endif %}
-            <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
-            {{- "\n" }}
 {%- set done = [] %}
         </div>
     </div>

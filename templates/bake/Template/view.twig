@@ -5,6 +5,11 @@
  */
 
 $this->assign('title', __('{{ pluralHumanName }}'));
+$this->Breadcrumbs->add([
+    ['title' => __('Home'), 'url' => '/'],
+    ['title' => __('List {{ pluralHumanName }}'), 'url' => ['action' => 'index']],
+    ['title' => __('View {{ singularHumanName }}')],
+]);
 ?>
 {% set associations = {'BelongsTo': [], 'HasOne': [], 'HasMany': [], 'BelongsToMany': []}|merge(associations) %}
 {% set fieldsData = Bake.getViewFieldsData(fields, schema, associations) %}
@@ -15,13 +20,29 @@ $this->assign('title', __('{{ pluralHumanName }}'));
     <div class="card-header d-flex">
         <h4 class="card-title">
             <?= $this->Html->link('<i class="bi bi-caret-left-fill"></i>', $redirect ?? ['action' => 'index'], ['escape' => false]) ?>
-            <?= __('{{ singularHumanName }}: {0}', h(${{ singularVar }}->{{ displayField }})) ?>
+            <?= __('View {{ singularHumanName }}: {0}', h(${{ singularVar }}->{{ displayField }})) ?>
         </h4>
         <div class="card-tools ms-auto d-flex gap-1">
-            <?= $this->Html->link(__('Edit {{ singularHumanName }}'), ['action' => 'edit', {{ pK|raw }}], ['class' => 'btn btn-warning btn-sm']) ?>
-            <?= $this->Form->postLink(__('Delete {{ singularHumanName }}'), ['action' => 'delete', {{ pK|raw }}], ['confirm' => __('Are you sure you want to delete {0}?', ${{ singularVar }}->{{ displayField }}), 'class' => 'btn btn-danger btn-sm']) ?>
-            <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= $this->Html->link(__('New {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= $this->Html->link(
+                __('List {{ pluralHumanName }}'),
+                ['action' => 'index', '?' => ['redirect' => $this->getRequest()->getPath()]],
+                ['class' => 'btn btn-light btn-sm']
+            ) ?>
+            <?= $this->Html->link(
+                __('Edit {{ singularHumanName }}'),
+                ['action' => 'edit', {{ pK|raw }}, '?' => ['redirect' => $this->getRequest()->getPath()]],
+                ['class' => 'btn btn-warning btn-sm']
+            ) ?>
+            <?= $this->Form->postLink(
+                __('Delete {{ singularHumanName }}'),
+                ['action' => 'delete', {{ pK|raw }}],
+                ['confirm' => __('Are you sure you want to delete {0}?', ${{ singularVar }}->{{ displayField }}), 'class' => 'btn btn-danger btn-sm']
+            ) ?>
+            <?= $this->Html->link(
+                __('New {{ singularHumanName }}'),
+                ['action' => 'add', '?' => ['redirect' => $this->getRequest()->getPath()]],
+                ['class' => 'btn btn-success btn-sm']
+            ) ?>
         </div>
     </div>
     <div class="card-body">
@@ -95,11 +116,13 @@ $this->assign('title', __('{{ pluralHumanName }}'));
         </table>
 {% if groupedFields.text %}
 {% for field in groupedFields.text %}
-        <div class="mb-3">
-            <strong><?= __('{{ field|humanize }}') ?></strong>
-            <blockquote>
-                <?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?>
-            </blockquote>
+        <div class="row">
+            <div class="col-12">
+                <strong><?= __('{{ field|humanize }}') ?></strong>
+                <blockquote>
+                    <?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?>
+                </blockquote>
+            </div>
         </div>
 {% endfor %}
 {% endif %}
