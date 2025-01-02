@@ -36,11 +36,18 @@ trait RedirectTrait
      */
     public function redirect(UriInterface|array|string $url, int $status = 302): ?Response
     {
-        $redirect = $this->getRedirect();
-        if ($redirect) {
-            $url = $redirect;
-        }
+        return parent::redirect($this->getRedirect() ?? $url, $status);
+    }
 
+    /**
+     * Force redirect to another page.
+     *
+     * @param string|array|\Psr\Http\Message\UriInterface $url A string, array-based URL or UriInterface instance.
+     * @param int $status HTTP status code (default 302)
+     * @return \Cake\Http\Response|null
+     */
+    public function forceRedirect(UriInterface|array|string $url, int $status = 302): ?Response
+    {
         return parent::redirect($url, $status);
     }
 
