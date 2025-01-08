@@ -9,12 +9,12 @@
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app-dark') ?>
+    <?= $this->Html->css('MazerTemplates.custom') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 </head>
 
 <body>
-    <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/initTheme') ?>
     <div id="app">
         <?= $this->element('MazerTemplates.partials/sidebar') ?>
         <div id="main">
@@ -31,6 +31,7 @@
             <?= $this->element('MazerTemplates.partials/footer') ?>
         </div>
     </div>
+    <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/initTheme') ?>
     <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/components/dark') ?>
     <?= $this->Html->script('MazerTemplates./mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min') ?>
     <?= $this->Html->script('MazerTemplates./mazer/assets/compiled/js/app') ?>

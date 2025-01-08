@@ -1,0 +1,4 @@
+.required .form-label:first-child:after {
+    content: " *";
+    color: #dc3545
+}
