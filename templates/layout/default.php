@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
+    <?= $this->fetch('meta') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app-dark') ?>
     <?= $this->Html->css('MazerTemplates.custom') ?>
-    <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 </head>
 
