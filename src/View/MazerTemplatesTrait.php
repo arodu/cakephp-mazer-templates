@@ -15,13 +15,13 @@ trait MazerTemplatesTrait
 {
     use UIViewTrait;
 
+    
+
     /**
      * @return void
      */
     public function MazerTemplatesInitialize(): void
     {
-        $this->initializeUI();
-
         $this->loadHelper('BsUtils.Menu');
         $this->loadHelper('MazerMenu', [
             'className' => 'BsUtils.Menu',
@@ -45,5 +45,12 @@ trait MazerTemplatesTrait
                 'menuTitle' => '<li class="sidebar-item {{class}}">{{text}}{{nest}}</li>',
             ],
         ]);
+
+        $helpers = [
+            'Flash' => ['className' => 'BootstrapUI.Flash', 'element' => 'MazerTemplates.flash/default'],
+        ];
+        $this->helpers = array_merge($helpers, $this->helpers);
+
+        $this->initializeUI();
     }
 }

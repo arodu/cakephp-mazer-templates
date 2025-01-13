@@ -25,10 +25,14 @@
             </header>
             <div class="page-heading">
                 <?= $this->element('MazerTemplates.partials/page_title') ?>
+            </div>
+            <div class="page-content">
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </div>
-            <?= $this->element('MazerTemplates.partials/footer') ?>
+            <footer class="mt-auto">
+                <?= $this->element('MazerTemplates.partials/footer') ?>
+            </footer>
         </div>
     </div>
     <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/initTheme') ?>
@@ -37,4 +41,5 @@
     <?= $this->Html->script('MazerTemplates./mazer/assets/compiled/js/app') ?>
     <?= $this->fetch('script') ?>
 </body>
+
 </html>
