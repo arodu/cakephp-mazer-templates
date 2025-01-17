@@ -57,6 +57,16 @@ $mainMenu = [
                         'label' => __('Checkbox'),
                         'url' => 'form-element-checkbox.html',
                     ],
+                    [
+                        'type' => $this->MazerMenu::ITEM_TYPE_DIVIDER
+                    ]
+                    [
+                        'label' => __('Disabled'),
+                        'url' => '#',
+                        'disabled' => function (\Cake\Http\ServerRequest $request) {
+                            return true;
+                        },
+                    ]
                 ],
             ],
         ],
