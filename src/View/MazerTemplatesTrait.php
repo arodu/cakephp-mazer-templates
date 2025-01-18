@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MazerTemplates\View;
 
 use BootstrapUI\View\UIViewTrait;
-use Cake\Utility\Hash;
 
 /**
  * MazerTemplates trait
@@ -22,12 +21,12 @@ trait MazerTemplatesTrait
     public function MazerTemplatesInitialize(array $options = []): void
     {
         $helpers = [
+            'MazerTemplates.Mazer' => $options,
             'BsUtils.Menu' => [],
             'Flash' => [
                 'className' => 'BootstrapUI.Flash',
                 'element' => 'MazerTemplates.flash/default',
             ],
-            'MazerTemplates.Mazer' => $options,
             'MazerMenu' => [
                 'className' => 'BsUtils.Menu',
                 'menuClass' => 'menu',
