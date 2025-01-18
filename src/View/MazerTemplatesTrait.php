@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MazerTemplates\View;
 
 use BootstrapUI\View\UIViewTrait;
+use Cake\Utility\Hash;
 
 /**
  * MazerTemplates trait
@@ -18,7 +19,7 @@ trait MazerTemplatesTrait
     /**
      * @return void
      */
-    public function MazerTemplatesInitialize(): void
+    public function MazerTemplatesInitialize(array $options = []): void
     {
         $helpers = [
             'BsUtils.Menu' => [],
@@ -26,6 +27,7 @@ trait MazerTemplatesTrait
                 'className' => 'BootstrapUI.Flash',
                 'element' => 'MazerTemplates.flash/default',
             ],
+            'MazerTemplates.Mazer' => $options,
             'MazerMenu' => [
                 'className' => 'BsUtils.Menu',
                 'menuClass' => 'menu',
@@ -34,7 +36,7 @@ trait MazerTemplatesTrait
                     'menuContainer' => '<ul class="{{menuClass}}">{{items}}</ul>',
                     'menuItem' => '<li class="sidebar-item{{class}}{{activeClass}}{{dropdownClass}}">{{text}}{{nest}}</li>',
                     'menuItemDisabled' => '<li class="sidebar-item{{class}}"><a class="sidebar-link disabled" aria-disabled="true"{{attrs}}>{{text}}</a></li>',
-                    'menuItemLink' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
+                    'menuItemLink' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span>{{append}}</a>',
                     'menuItemLinkNest' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
                     'menuItemDivider' => '<li class="sidebar-item"><hr class="mx-4 my-0"></li>',
 
