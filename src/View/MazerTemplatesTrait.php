@@ -34,7 +34,7 @@ trait MazerTemplatesTrait
                 'templates' => [
                     'menuContainer' => '<ul class="{{menuClass}}">{{items}}</ul>',
                     'menuItem' => '<li class="sidebar-item{{class}}{{activeClass}}{{dropdownClass}}">{{text}}{{nest}}</li>',
-                    'menuItemDisabled' => '<li class="sidebar-item{{class}}"><a class="sidebar-link disabled" aria-disabled="true"{{attrs}}>{{text}}</a></li>',
+                    'menuItemDisabled' => '<li class="sidebar-item{{class}}"><a class="sidebar-link disabled" aria-disabled="true"{{attrs}}>{{icon}}<span>{{text}}</span></a></li>',
                     'menuItemLink' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span>{{append}}</a>',
                     'menuItemLinkNest' => '<a class="sidebar-link" href="{{url}}">{{icon}}<span>{{text}}</span></a>',
                     'menuItemDivider' => '<li class="sidebar-item"><hr class="mx-4 my-0"></li>',
