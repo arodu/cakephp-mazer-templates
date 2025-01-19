@@ -10,7 +10,7 @@
     <?= $this->fetch('meta') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app') ?>
     <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app-dark') ?>
-    <?= $this->Html->css('MazerTemplates.custom') ?>
+    <?= $this->Html->css('MazerTemplates.style') ?>
     <?= $this->fetch('css') ?>
 </head>
 

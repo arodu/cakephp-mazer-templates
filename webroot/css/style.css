@@ -2,3 +2,8 @@
     content: " *";
     color: #dc3545
 }
+
+.table .actions {
+    white-space: nowrap;
+    width: 1%;
+}
