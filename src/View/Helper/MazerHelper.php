@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MazerTemplates\View\Helper;
 
 use Cake\Core\Configure;
+use Cake\Event\EventInterface;
 use Cake\Utility\Hash;
 use Cake\View\Helper;
 
@@ -30,8 +32,17 @@ class MazerHelper extends Helper
         'copyright' => '© 2021 Mazer',
 
         'meta' => [],
-        'css' => [],
-        'script' => [],
+        'css' => [
+            'MazerTemplates./mazer/assets/compiled/css/app',
+            'MazerTemplates./mazer/assets/compiled/css/app-dark',
+            'MazerTemplates.style',
+        ],
+        'scripts' => [
+            'MazerTemplates./mazer/assets/static/js/initTheme',
+            'MazerTemplates./mazer/assets/static/js/components/dark',
+            'MazerTemplates./mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min',
+            'MazerTemplates./mazer/assets/compiled/js/app',
+        ],
     ];
 
     protected array $helpers = ['Html'];
@@ -46,59 +57,26 @@ class MazerHelper extends Helper
     }
 
     /**
-     * # options:
-     * - overwrite: bool
-     *
      * @param array|string $url
      * @param array $options
-     * @return string|null
+     * @return self
      */
-    public function script(array|string $url, array $options = []): ?string
+    public function addScript(string $url)
     {
-        if(is_string($url)) {
-            $url = [$url];
-        }
-
-        if (isset($options['overwrite']) && $options['overwrite']) {
-            $script = $url;
-        } else {
-            $script = Hash::merge($this->getConfig('script', []), $url);
-        }
-        unset($options['overwrite']);
-
-        if (empty($script)) {
-            return null;
-        }
-
-        return $this->Html->script($script, $options);
+        $this->setConfig('scripts', array_merge($this->getConfig('scripts', []), [$url]));
+        return $this;
     }
 
     /**
      * # options:
-     * - overwrite: bool
-     *
      * @param array|string $url
      * @param array $options
-     * @return string|null
+     * @return self
      */
-    public function css(array|string $url, array $options = []): ?string
+    public function addCss(string $url)
     {
-        if(is_string($url)) {
-            $url = [$url];
-        }
-
-        if (isset($options['overwrite']) && $options['overwrite']) {
-            $css = $url;
-        } else {
-            $css = Hash::merge($this->getConfig('css', []), $url);
-        }
-        unset($options['overwrite']);
-
-        if (empty($css)) {
-            return null;
-        }
-
-        return $this->Html->css($css, $options);
+        $this->setConfig('css', array_merge($this->getConfig('css', []), [$url]));
+        return $this;
     }
 
     public function getAppName(): string
@@ -123,5 +101,14 @@ class MazerHelper extends Helper
         $this->setConfig('appLogo', $appLogo);
 
         return $this;
+    }
+
+    public function beforeRender(EventInterface $event, $viewFile)
+    {
+        foreach ($this->getConfig('meta') as $name => $content) {
+            $this->Html->meta($name, $content, ['block' => true]);
+        }
+        $this->Html->css($this->getConfig('css'), ['block' => true]);
+        $this->Html->script($this->getConfig('scripts'), ['block' => true]);
     }
 }

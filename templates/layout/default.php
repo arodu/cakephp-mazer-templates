@@ -8,9 +8,6 @@
     <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->fetch('meta') ?>
-    <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app') ?>
-    <?= $this->Html->css('MazerTemplates./mazer/assets/compiled/css/app-dark') ?>
-    <?= $this->Html->css('MazerTemplates.style') ?>
     <?= $this->fetch('css') ?>
 </head>
 
@@ -35,10 +32,6 @@
             </footer>
         </div>
     </div>
-    <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/initTheme') ?>
-    <?= $this->Html->script('MazerTemplates./mazer/assets/static/js/components/dark') ?>
-    <?= $this->Html->script('MazerTemplates./mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min') ?>
-    <?= $this->Html->script('MazerTemplates./mazer/assets/compiled/js/app') ?>
     <?= $this->fetch('script') ?>
 </body>
 
