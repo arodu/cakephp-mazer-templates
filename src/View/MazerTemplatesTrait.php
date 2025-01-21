@@ -8,8 +8,8 @@ use BootstrapUI\View\UIViewTrait;
 
 /**
  * MazerTemplates trait
- * @property \BsUtils\View\Helper\MenuHelper $Menu
- * @property \BsUtils\View\Helper\MenuHelper $MazerMenu
+ * @property \BootstrapTools\View\Helper\MenuHelper $Menu
+ * @property \BootstrapTools\View\Helper\MenuHelper $MazerMenu
  */
 trait MazerTemplatesTrait
 {
@@ -22,13 +22,13 @@ trait MazerTemplatesTrait
     {
         $helpers = [
             'MazerTemplates.Mazer' => $options,
-            'BsUtils.Menu' => [],
+            'BootstrapTools.Menu' => [],
             'Flash' => [
                 'className' => 'BootstrapUI.Flash',
                 'element' => 'MazerTemplates.flash/default',
             ],
             'MazerMenu' => [
-                'className' => 'BsUtils.Menu',
+                'className' => 'BootstrapTools.Menu',
                 'menuClass' => 'menu',
                 'dropdownClass' => 'has-sub',
                 'templates' => [
