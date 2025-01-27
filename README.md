@@ -36,3 +36,5 @@ You can load the plugin using the shell command:
 bin/cake plugin load Mazer
 bin/cake plugin load BootstrapUI
 ```
+---
+[© arodu 2025](https://github.com/arodu) 
