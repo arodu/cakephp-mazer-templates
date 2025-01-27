@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MazerTemplates\View\Helper;
+namespace Mazer\View\Helper;
 
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
@@ -33,15 +33,15 @@ class MazerHelper extends Helper
 
         'meta' => [],
         'css' => [
-            'MazerTemplates./mazer/assets/compiled/css/app',
-            'MazerTemplates./mazer/assets/compiled/css/app-dark',
-            'MazerTemplates.style',
+            'Mazer./mazer/assets/compiled/css/app',
+            'Mazer./mazer/assets/compiled/css/app-dark',
+            'Mazer.style',
         ],
         'scripts' => [
-            'MazerTemplates./mazer/assets/static/js/initTheme',
-            'MazerTemplates./mazer/assets/static/js/components/dark',
-            'MazerTemplates./mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min',
-            'MazerTemplates./mazer/assets/compiled/js/app',
+            'Mazer./mazer/assets/static/js/initTheme',
+            'Mazer./mazer/assets/static/js/components/dark',
+            'Mazer./mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.min',
+            'Mazer./mazer/assets/compiled/js/app',
         ],
     ];
 

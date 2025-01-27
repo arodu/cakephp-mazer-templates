@@ -13,7 +13,7 @@
 
 <body>
     <div id="app">
-        <?= $this->element('MazerTemplates.sidebar/main') ?>
+        <?= $this->element('Mazer.sidebar/main') ?>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -21,14 +21,14 @@
                 </a>
             </header>
             <div class="page-heading">
-                <?= $this->element('MazerTemplates.header/page_title') ?>
+                <?= $this->element('Mazer.header/page_title') ?>
             </div>
             <div class="page-content">
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </div>
             <footer class="mt-auto">
-                <?= $this->element('MazerTemplates.footer/main') ?>
+                <?= $this->element('Mazer.footer/main') ?>
             </footer>
         </div>
     </div>

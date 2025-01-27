@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MazerTemplates;
+namespace Mazer;
 
 use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
@@ -11,9 +11,9 @@ use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 
 /**
- * Plugin for MazerTemplates
+ * Plugin for Mazer
  */
-class MazerTemplatesPlugin extends BasePlugin
+class MazerPlugin extends BasePlugin
 {
     /**
      * Load all the plugin configuration and bootstrap logic.
@@ -42,7 +42,7 @@ class MazerTemplatesPlugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin(
-            'MazerTemplates',
+            'Mazer',
             ['path' => '/mazer'],
             function (RouteBuilder $builder) {
                 // Add custom routes here

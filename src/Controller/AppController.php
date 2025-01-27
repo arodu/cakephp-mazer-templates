@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MazerTemplates\Controller;
+namespace Mazer\Controller;
 
 use App\Controller\AppController as BaseController;
 

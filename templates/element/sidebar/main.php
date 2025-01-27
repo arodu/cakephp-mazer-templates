@@ -13,13 +13,13 @@
                     </a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
-                    <?= $this->element('MazerTemplates.sidebar/theme_toggle') ?>
+                    <?= $this->element('Mazer.sidebar/theme_toggle') ?>
                 </div>
                 <div class="sidebar-toggler  x">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
-        <?= $this->element('MazerTemplates.sidebar/menu') ?>
+        <?= $this->element('Mazer.sidebar/menu') ?>
     </div>
 </div>

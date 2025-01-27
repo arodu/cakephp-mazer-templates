@@ -1,1 +1,1 @@
--- Test database schema for MazerTemplates
+-- Test database schema for Mazer

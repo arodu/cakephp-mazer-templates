@@ -33,6 +33,6 @@ composer require arodu/mazer-templates
 You can load the plugin using the shell command:
 
 ```bash
-bin/cake plugin load MazerTemplates
+bin/cake plugin load Mazer
 bin/cake plugin load BootstrapUI
 ```

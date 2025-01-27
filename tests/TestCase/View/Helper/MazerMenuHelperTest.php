@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace MazerTemplates\Test\TestCase\View\Helper;
+namespace Mazer\Test\TestCase\View\Helper;
 
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
-use MazerTemplates\View\Helper\MazerMenuHelper;
+use Mazer\View\Helper\MazerMenuHelper;
 
 /**
- * MazerTemplates\View\Helper\MazerMenuHelper Test Case
+ * Mazer\View\Helper\MazerMenuHelper Test Case
  */
 class MazerMenuHelperTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \MazerTemplates\View\Helper\MazerMenuHelper
+     * @var \Mazer\View\Helper\MazerMenuHelper
      */
     protected $MazerMenu;
 

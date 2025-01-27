@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MazerTemplates\Controller;
+namespace Mazer\Controller;
 
-use MazerTemplates\Controller\AppController;
+use Mazer\Controller\AppController;
 
 class PagesController extends AppController
 {

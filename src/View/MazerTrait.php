@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace MazerTemplates\View;
+namespace Mazer\View;
 
 use BootstrapUI\View\UIViewTrait;
 
 /**
- * MazerTemplates trait
+ * Mazer trait
  * @property \BootstrapTools\View\Helper\MenuHelper $Menu
  * @property \BootstrapTools\View\Helper\MenuHelper $MazerMenu
  */
-trait MazerTemplatesTrait
+trait MazerTrait
 {
     use UIViewTrait;
 
     /**
      * @return void
      */
-    public function MazerTemplatesInitialize(array $options = []): void
+    public function MazerInitialize(array $options = []): void
     {
         $helpers = [
-            'MazerTemplates.Mazer' => $options,
+            'Mazer.Mazer' => $options,
             'BootstrapTools.Menu' => [],
             'Flash' => [
                 'className' => 'BootstrapUI.Flash',
-                'element' => 'MazerTemplates.flash/default',
+                'element' => 'Mazer.flash/default',
             ],
             'MazerMenu' => [
                 'className' => 'BootstrapTools.Menu',

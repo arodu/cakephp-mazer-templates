@@ -79,7 +79,7 @@ $this->assign('subTitle', 'Mazer Templates plugin debug page');
                         <div class="row">
                             <div class="column">
                                 <div class="alert alert-info text-center">
-                                    <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/plugin/MazerTemplates/Pages/debug.php with your own version.</small>
+                                    <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/plugin/Mazer/Pages/debug.php with your own version.</small>
                                 </div>
                                 <div id="url-rewriting-warning" style="padding: 1rem; background: #fcebea; color: #cc1f1a; border-color: #ef5753;">
                                     <ul>

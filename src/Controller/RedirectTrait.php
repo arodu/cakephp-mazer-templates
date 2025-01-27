@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MazerTemplates\Controller;
+namespace Mazer\Controller;
 
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
