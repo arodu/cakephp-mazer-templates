@@ -73,7 +73,7 @@ $mainMenu = [
     ],
     [
         'label' => __('Theme'),
-        'url' => '/mazer_templates/mazer/index.html',
+        'url' => '/mazer/mazer/index.html',
         'icon' => 'bi bi-palette-fill',
     ],
     [
