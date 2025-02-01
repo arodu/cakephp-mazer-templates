@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+
+$this->Mazer->renderAssets();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
