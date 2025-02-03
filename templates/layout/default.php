@@ -40,6 +40,7 @@ $this->Mazer->renderAssets();
             </footer>
         </div>
     </div>
+    <?= $this->fetch('modal') ?>
     <?= $this->fetch('script') ?>
 </body>
 
