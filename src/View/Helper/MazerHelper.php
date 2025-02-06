@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mazer\View\Helper;
 
-use BootstrapTools\View\Helper\ThemeSettingsTrait;
+use BootstrapTools\View\Trait\ThemeSettingsTrait;
 use Cake\View\Helper;
 use Mazer\Mazer;
 
