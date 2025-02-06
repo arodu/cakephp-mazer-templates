@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Mazer\View\Helper;
 
-use BootstrapTools\View\Helper\BootstrapThemeHelper;
-use Cake\Core\Configure;
-use Cake\Event\EventInterface;
-use Cake\Utility\Hash;
+use BootstrapTools\View\Helper\ThemeSettingsTrait;
+use Cake\View\Helper;
+use Mazer\Mazer;
 
 /**
  * Mazer helper
- * 
- * @property \Cake\View\Helper\HtmlHelper $Html
  */
-class MazerHelper extends BootstrapThemeHelper
+class MazerHelper extends Helper
 {
+    use ThemeSettingsTrait;
+
     /**
      * Default configuration.
      *
      * @var array<string, mixed>
      */
     protected array $_defaultConfig = [
+        'configKey' => Mazer::NAME,
         'settings' => [
             'appName' => 'Mazer',
             'appLogo' => 'M',
@@ -47,7 +47,6 @@ class MazerHelper extends BootstrapThemeHelper
      */
     public function initialize(array $config): void
     {
-        $config = Hash::merge($this->getConfig(null, []), Configure::read('Mazer', []), $config);
-        $this->setConfig($config);
+        $this->themeSettingsInitialize($config);
     }
 }
