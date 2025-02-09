@@ -26,17 +26,20 @@ $this->Breadcrumbs->add([
             <?= $this->Html->link(
                 __('List {{ pluralHumanName }}'),
                 ['action' => 'index', '?' => ['redirect' => $this->getRequest()->getPath()]],
-                ['class' => 'btn btn-light btn-sm']
+                ['class' => 'btn btn-light']
             ) ?>
             <?= $this->Html->link(
                 __('Edit {{ singularHumanName }}'),
                 ['action' => 'edit', {{ pK|raw }}, '?' => ['redirect' => $this->getRequest()->getPath()]],
-                ['class' => 'btn btn-warning btn-sm']
+                ['class' => 'btn btn-warning']
             ) ?>
             <?= $this->Form->postLink(
                 __('Delete {{ singularHumanName }}'),
                 ['action' => 'delete', {{ pK|raw }}],
-                ['confirm' => __('Are you sure you want to delete {0}?', ${{ singularVar }}->{{ displayField }}), 'class' => 'btn btn-danger btn-sm']
+                [
+                    'confirm' => __('Are you sure you want to delete {0}?', ${{ singularVar }}->{{ displayField }}),
+                    'class' => 'btn btn-danger',
+                ]
             ) ?>
         </div>
     </div>

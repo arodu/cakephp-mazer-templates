@@ -17,8 +17,8 @@ $this->Breadcrumbs->add([
             <?= __('List {{ pluralHumanName }}') ?>
         </h4>
         <div class="ms-auto d-flex gap-1">
-            <?= $this->Paginator->limitControl([], null, ['label' => false, 'spacing' => 'mb-0', 'class' => 'form-select-sm']) ?>
-            <?= $this->Html->link(__('Add {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= $this->Paginator->limitControl([], null, ['label' => false, 'spacing' => 'mb-0']) ?>
+            <?= $this->Html->link(__('Add {{ singularHumanName }}'), ['action' => 'add'], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
     <div class="card-body">

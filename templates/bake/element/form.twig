@@ -9,18 +9,21 @@
             <?= $this->Html->link(
                 __('List {{ pluralHumanName }}'),
                 ['action' => 'index'],
-                ['class' => 'btn btn-light btn-sm']
+                ['class' => 'btn btn-light']
             ) ?>
 {% if 'add' not in action %}
             <?= $this->Html->link(
                 __('View {{ singularHumanName }}'),
                 ['action' => 'view', ${{ singularVar }}->{{ primaryKey[0] }}],
-                ['class' => 'btn btn-info btn-sm']
+                ['class' => 'btn btn-info']
             ) ?>
             <?= $this->Form->postLink(
                 __('Delete {{ singularHumanName }}'),
                 ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
-                ['confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}), 'class' => 'btn btn-danger btn-sm']
+                [
+                    'confirm' => __('Are you sure you want to delete # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}),
+                    'class' => 'btn btn-danger',
+                ]
             ) ?>
 {% endif %}
 {%- set done = [] %}
