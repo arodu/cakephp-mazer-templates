@@ -9,6 +9,10 @@ abstract class Mazer
 
     const MAZER_MENU = 'MazerMenu';
     const MAZER_MENU_CONFIG = [
+        'configFile' => 'Mazer.menu',
+        'configKey' => 'Menu',
+
+        'maxLevel' => 3,
         'menuClass' => 'menu',
         'dropdownClass' => 'has-sub',
         'templates' => [
