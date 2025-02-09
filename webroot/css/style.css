@@ -7,3 +7,7 @@
     white-space: nowrap;
     width: 1%;
 }
+
+#url-rewriting-warning {
+    display: none;
+}

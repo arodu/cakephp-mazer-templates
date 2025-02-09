@@ -4,15 +4,25 @@
  * @var \App\View\AppView $this
  */
 
+use Cake\Core\Configure;
+
 $mainMenu = [
     [
         'label' => __('Menu'),
         'type' => $this->MazerMenu::ITEM_TYPE_TITLE
     ],
-    [
-        'label' => __('Dashboard'),
-        'url' => '#',
+    'home' => [
+        'label' => __('Home'),
+        'url' => '/',
         'icon' => 'bi bi-grid-fill',
+    ],
+    'debug' => [
+        'label' => __('Debug'),
+        'url' => '/mazer/debug',
+        'icon' => 'bi bi-bug-fill',
+        'visible' => function (\Cake\Http\ServerRequest $request) {
+            return Configure::read('debug');
+        },
     ],
     'components' => [
         'label' => __('Components'),
@@ -76,12 +86,10 @@ $mainMenu = [
     ],
     [
         'label' => __('Fork me on GitHub'),
-        'url' => 'https://github.com/arodu/cakephp-mazer-templates',
+        'url' => 'https://github.com/arodu/cakephp-mazer',
         'icon' => 'bi bi-github',
     ]
 ];
-
-$this->MazerMenu->activeItem('components.accordion');
 
 ?>
 

@@ -2,9 +2,6 @@
 /**
  * @var \App\View\AppView $this
  */
-
-$this->Mazer->renderAssets();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +12,9 @@ $this->Mazer->renderAssets();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
+    <?= $this->Mazer->renderMeta() ?>
     <?= $this->fetch('meta') ?>
+    <?= $this->Mazer->renderCss() ?>
     <?= $this->fetch('css') ?>
 </head>
 
@@ -40,7 +39,7 @@ $this->Mazer->renderAssets();
             </footer>
         </div>
     </div>
-    <?= $this->fetch('modal') ?>
+    <?= $this->Mazer->renderScripts() ?>
     <?= $this->fetch('script') ?>
 </body>
 
