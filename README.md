@@ -10,6 +10,7 @@
   - [Dependencies](#dependencies)
   - [Installation](#installation)
   - [Configuration](#configuration)
+  - [Add config on AppView.php](#add-config-on-appviewphp)
 
 ## Dependencies
 
@@ -34,7 +35,32 @@ You can load the plugin using the shell command:
 
 ```bash
 bin/cake plugin load Mazer
-bin/cake plugin load BootstrapUI
 ```
+
+
+## Add config on AppView.php
+
+```php
+<?php
+declare(strict_types=1);
+namespace App\View;
+
+use Cake\View\View;
+use Mazer\View\MazerViewTrait;
+
+class AppView extends View
+{
+    use MazerViewTrait;
+
+    protected string $layout = 'Mazer.default';
+
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->initializeMazer();
+    }
+}
+```
+
 ---
-[© arodu 2025](https://github.com/arodu) 
+[© 2025 arodu](https://github.com/arodu) 

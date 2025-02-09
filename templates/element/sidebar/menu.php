@@ -11,10 +11,7 @@ $mainMenu = [
     ],
     [
         'label' => __('Dashboard'),
-        'url' => [
-            'controller' => __('Projects'),
-            'action' => 'index',
-        ],
+        'url' => '#',
         'icon' => 'bi bi-grid-fill',
     ],
     'components' => [
@@ -59,13 +56,13 @@ $mainMenu = [
                     ],
                     [
                         'type' => $this->MazerMenu::ITEM_TYPE_DIVIDER
-                    ]
+                    ],
                     [
                         'label' => __('Disabled'),
                         'url' => '#',
-                        'disabled' => function (\Cake\Http\ServerRequest $request) {
-                            return true;
-                        },
+                        //'disabled' => function (\Cake\Http\ServerRequest $request) {
+                        //    return true;
+                        //},
                     ]
                 ],
             ],
@@ -75,6 +72,7 @@ $mainMenu = [
         'label' => __('Theme'),
         'url' => '/mazer/mazer/index.html',
         'icon' => 'bi bi-palette-fill',
+        'target' => '_blank',
     ],
     [
         'label' => __('Fork me on GitHub'),

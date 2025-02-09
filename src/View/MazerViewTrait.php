@@ -9,11 +9,14 @@ use BootstrapUI\View\UIViewTrait;
 use Mazer\Mazer;
 
 /**
- * Mazer trait
- * @property \BootstrapTools\View\Helper\MenuHelper $Menu
+ * MazerViewTrait
+ * 
+ * @property \Mazer\View\Helper\MazerHelper $Mazer
  * @property \BootstrapTools\View\Helper\MenuHelper $MazerMenu
+ * @property \BootstrapTools\View\Helper\BsHelper $Bs
+ * @property \BootstrapUI\View\Helper\FlashHelper $Flash
  */
-trait MazerTrait
+trait MazerViewTrait
 {
     use UIViewTrait;
     use MenuLoaderTrait;
@@ -21,7 +24,7 @@ trait MazerTrait
     /**
      * @return void
      */
-    public function MazerInitialize(array $options = []): void
+    public function initializeMazer(array $options = []): void
     {
         $helpers = [
             'Flash' => [
@@ -32,6 +35,7 @@ trait MazerTrait
         $this->helpers = array_merge($helpers, $this->helpers);
         $this->initializeUI();
 
+        $this->loadHelper('BootstrapTools.Bs');
         $this->loadHelper('Mazer.Mazer', $options);
         $this->loadMenuHelper('MazerMenu', Mazer::MAZER_MENU_CONFIG);
     }
