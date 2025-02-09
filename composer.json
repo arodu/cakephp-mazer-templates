@@ -18,12 +18,6 @@
             "Mazer\\": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:arodu/cakephp-bs-utils.git"
-        }
-    ],
     "autoload-dev": {
         "psr-4": {
             "Mazer\\Test\\": "tests/",
