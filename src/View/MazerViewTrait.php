@@ -13,7 +13,7 @@ use Mazer\Mazer;
  * 
  * @property \Mazer\View\Helper\MazerHelper $Mazer
  * @property \BootstrapTools\View\Helper\MenuHelper $MazerMenu
- * @property \BootstrapTools\View\Helper\BsHelper $Bs
+ * @property \BootstrapTools\View\Helper\BootstrapHelper $Bs
  * @property \BootstrapUI\View\Helper\FlashHelper $Flash
  * @property \BootstrapUI\View\Helper\FormHelper $Form
  * @property \BootstrapUI\View\Helper\HtmlHelper $Html
@@ -38,7 +38,7 @@ trait MazerViewTrait
         $this->helpers = array_merge($helpers, $this->helpers);
         $this->initializeUI();
 
-        $this->addHelper('BootstrapTools.Bs');
+        $this->addHelper('BootstrapTools.Bootstrap');
         $this->addHelper('Mazer.Mazer', $options);
         $this->loadMenuHelper('MazerMenu', Mazer::MAZER_MENU_CONFIG);
     }
