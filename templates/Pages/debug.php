@@ -7,7 +7,7 @@ $this->assign('subTitle', 'Mazer Templates plugin debug page');
 
 $this->MazerMenu->activeItem('debug');
 
-echo $this->element('BootstrapTools.debug/page', [
+echo $this->element('BootstrapTools.pages/debug', [
     'plugin' => [
         'name' => 'arodu/cakephp-mazer',
         'version' => Common::getPackageVersion('arodu/cakephp-mazer'),
