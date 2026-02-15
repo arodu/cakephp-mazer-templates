@@ -95,17 +95,14 @@ class Sidebar {
     if (typeof PerfectScrollbar == "function") {
       const container = document.querySelector(".sidebar-wrapper")
       const ps = new PerfectScrollbar(container, {
-        wheelPropagation: true,
+        wheelPropagation: false,
       })
     }
 
     // Scroll into active sidebar
     setTimeout(() => {
-      const activeSidebarItem = document.querySelector(".sidebar-item.active");
-      if (activeSidebarItem) {
-        this.forceElementVisibility(activeSidebarItem);
-      }
-    }, 300);
+      this.forceElementVisibility(document.querySelector(".sidebar-item.active"))
+    }, 300)
 
 
     if (this.options.recalculateHeight) {

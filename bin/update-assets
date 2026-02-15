@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+$rootDir = dirname(__DIR__);
+$autoloadPath = $rootDir . '/vendor/autoload.php';
+
+if (!file_exists($autoloadPath)) {
+    echo "Error: vendor/autoload.php not found.\n";
+    exit(1);
+}
+
+$loader = require $autoloadPath;
+
+// --- INICIO DEL PARCHE DE DESARROLLO ---
+// Si estamos en desarrollo local, forzamos la carga del plugin hermano "BootstrapTools"
+// Asumiendo que tus plugins están en: /plugins/CakeMazer y /plugins/BootstrapTools
+$localDevPath = dirname($rootDir) . '/cakephp-bootstrap-tools/src';
+
+if (is_dir($localDevPath)) {
+    // Le decimos a Composer: "Si buscas BootstrapTools, mira también aquí"
+    $loader->addPsr4('BootstrapTools\\', $localDevPath);
+    // echo ">> [DEV MODE] Cargando BootstrapTools desde: $localDevPath\n"; // Descomenta para depurar
+}
+// --- FIN DEL PARCHE DE DESARROLLO ---
+
+use BootstrapTools\Command\UpdateThemeAssetsCommand;
+use Cake\Console\ConsoleIo;
+
+// 2. Preparar Argumentos
+$args = [
+    'update_theme_assets', 
+    '--path',
+    $rootDir
+];
+
+// 3. Ejecutar Comando
+// Verificamos que la clase exista antes de instanciar para dar un error más claro
+if (!class_exists(UpdateThemeAssetsCommand::class)) {
+    echo "Error Fatal: No se encuentra la clase UpdateThemeAssetsCommand.\n";
+    echo "Verifica que el plugin BootstrapTools esté instalado o que la ruta local sea correcta.\n";
+    exit(1);
+}
+
+$command = new UpdateThemeAssetsCommand();
+$io = new ConsoleIo();
+$exitCode = $command->run($args, $io);
+
+exit($exitCode);

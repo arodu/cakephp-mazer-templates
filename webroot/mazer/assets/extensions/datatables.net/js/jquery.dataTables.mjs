@@ -1,5 +1,5 @@
-/*! DataTables 1.13.11
- * ©2008-2024 SpryMedia Ltd - datatables.net/license
+/*! DataTables 1.13.5
+ * ©2008-2023 SpryMedia Ltd - datatables.net/license
  */
 
 import jQuery from 'jquery';
@@ -1288,7 +1288,7 @@ var _re_date = /^\d{2,4}[\.\/\-]\d{1,2}[\.\/\-]\d{1,2}([T ]{1}\d{1,2}[:\.]\d{2}(
 // Escape regular expression special characters
 var _re_escape_regex = new RegExp( '(\\' + [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\', '$', '^', '-' ].join('|\\') + ')', 'g' );
 
-// https://en.wikipedia.org/wiki/Foreign_exchange_market
+// http://en.wikipedia.org/wiki/Foreign_exchange_market
 // - \u20BD - Russian ruble.
 // - \u20a9 - South Korean Won
 // - \u20BA - Turkish Lira
@@ -2287,12 +2287,6 @@ function _fnColumnOptions( oSettings, iCol, oOptions )
 			oCol.aDataSort = [ oOptions.iDataSort ];
 		}
 		_fnMap( oCol, oOptions, "aDataSort" );
-
-		// Fall back to the aria-label attribute on the table header if no ariaTitle is
-		// provided.
-		if (! oCol.ariaTitle) {
-			oCol.ariaTitle = th.attr("aria-label");
-		}
 	}
 
 	/* Cache the data get and set functions for speed */
@@ -4256,7 +4250,7 @@ function _fnFeatureHtmlFilter ( settings )
 		/* Update all other filter input elements for the new display */
 		var n = features.f;
 		var val = !this.value ? "" : this.value; // mental IE8 fix :-(
-		if(previousSearch['return'] && event.key !== "Enter") {
+		if(previousSearch.return && event.key !== "Enter") {
 			return;
 		}
 		/* Now do the filter */
@@ -4266,7 +4260,7 @@ function _fnFeatureHtmlFilter ( settings )
 				"bRegex": previousSearch.bRegex,
 				"bSmart": previousSearch.bSmart ,
 				"bCaseInsensitive": previousSearch.bCaseInsensitive,
-				"return": previousSearch['return']
+				"return": previousSearch.return
 			} );
 
 			// Need to redraw, without resorting
@@ -4341,7 +4335,7 @@ function _fnFilterComplete ( oSettings, oInput, iForce )
 		oPrevSearch.bRegex = oFilter.bRegex;
 		oPrevSearch.bSmart = oFilter.bSmart;
 		oPrevSearch.bCaseInsensitive = oFilter.bCaseInsensitive;
-		oPrevSearch['return'] = oFilter['return'];
+		oPrevSearch.return = oFilter.return;
 	};
 	var fnRegex = function ( o ) {
 		// Backwards compatibility with the bEscapeRegex option
@@ -4593,7 +4587,7 @@ function _fnFilterData ( settings )
 				// If it looks like there is an HTML entity in the string,
 				// attempt to decode it so sorting works as expected. Note that
 				// we could use a single line of jQuery to do this, but the DOM
-				// method used here is much faster https://jsperf.com/html-decode
+				// method used here is much faster http://jsperf.com/html-decode
 				if ( cellData.indexOf && cellData.indexOf('&') !== -1 ) {
 					__filter_div.innerHTML = cellData;
 					cellData = __filter_div_textContent ?
@@ -5618,13 +5612,11 @@ function _fnCalculateColumnWidths ( oSettings )
 	}
 
 	/* Convert any user input sizes into pixel sizes */
-	var sizes = _fnConvertToWidth(_pluck(columns, 'sWidthOrig'), tableContainer);
-
 	for ( i=0 ; i<visibleColumns.length ; i++ ) {
 		column = columns[ visibleColumns[i] ];
 
 		if ( column.sWidth !== null ) {
-			column.sWidth = sizes[i];
+			column.sWidth = _fnConvertToWidth( column.sWidthOrig, tableContainer );
 
 			userInputs = true;
 		}
@@ -5827,40 +5819,26 @@ var _fnThrottle = DataTable.util.throttle;
 
 
 /**
- * Convert a set of CSS units width to pixels (e.g. 2em)
- *  @param {string[]} widths widths to be converted
+ * Convert a CSS unit width to pixels (e.g. 2em)
+ *  @param {string} width width to be converted
  *  @param {node} parent parent to get the with for (required for relative widths) - optional
- *  @returns {int[]} widths in pixels
+ *  @returns {int} width in pixels
  *  @memberof DataTable#oApi
  */
-function _fnConvertToWidth ( widths, parent )
+function _fnConvertToWidth ( width, parent )
 {
-	var els = [];
-	var results = [];
-
-	// Add the elements in a single loop so we only need to reflow once
-	for (var i=0 ; i<widths.length ; i++) {
-		if (widths[i]) {
-			els.push(
-				$('<div/>')
-					.css( 'width', _fnStringToCss( widths[i] ) )
-					.appendTo( parent || document.body )
-			)
-		}
-		else {
-			els.push(null);
-		}
+	if ( ! width ) {
+		return 0;
 	}
 
-	// Get the sizes (will reflow once)
-	for (var i=0 ; i<widths.length ; i++) {
-		results.push(els[i] ? els[i][0].offsetWidth : null);
-	}
+	var n = $('<div/>')
+		.css( 'width', _fnStringToCss( width ) )
+		.appendTo( parent || document.body );
 
-	// Tidy
-	$(els).remove();
+	var val = n[0].offsetWidth;
+	n.remove();
 
-	return results;
+	return val;
 }
 
 
@@ -6595,7 +6573,7 @@ function _fnLog( settings, level, msg, tn )
 
 	if ( tn ) {
 		msg += '. For more information about this error, please see '+
-		'https://datatables.net/tn/'+tn;
+		'http://datatables.net/tn/'+tn;
 	}
 
 	if ( ! level  ) {
@@ -8526,13 +8504,7 @@ var __details_events = function ( settings )
 				row = data[i];
 
 				if ( row._details ) {
-					row._details.each(function () {
-						var el = $(this).children('td');
-
-						if (el.length == 1) {
-							el.attr('colspan', visible);
-						}
-					});
+					row._details.children('td[colspan]').attr('colspan', visible );
 				}
 			}
 		} );
@@ -9739,12 +9711,12 @@ _api_register( 'i18n()', function ( token, def, plural ) {
 /**
  * Version string for plug-ins to check compatibility. Allowed format is
  * `a.b.c-d` where: a:int, b:int, c:int, d:string(dev|beta|alpha). `d` is used
- * only for non-release builds. See https://semver.org/ for more information.
+ * only for non-release builds. See http://semver.org/ for more information.
  *  @member
  *  @type string
  *  @default Version number
  */
-DataTable.version = "1.13.11";
+DataTable.version = "1.13.5";
 
 /**
  * Private data store, containing all of the settings objects that are
@@ -10320,7 +10292,7 @@ DataTable.defaults = {
 	 * --------
 	 *
 	 * As an object, the parameters in the object are passed to
-	 * [jQuery.ajax](https://api.jquery.com/jQuery.ajax/) allowing fine control
+	 * [jQuery.ajax](http://api.jquery.com/jQuery.ajax/) allowing fine control
 	 * of the Ajax request. DataTables has a number of default parameters which
 	 * you can override using this option. Please refer to the jQuery
 	 * documentation for a full description of the options available, although
@@ -12028,7 +12000,7 @@ DataTable.defaults = {
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "language": {
-		 *          "url": "https://www.sprymedia.co.uk/dataTables/lang.txt"
+		 *          "url": "http://www.sprymedia.co.uk/dataTables/lang.txt"
 		 *        }
 		 *      } );
 		 *    } );
@@ -14809,7 +14781,7 @@ $.extend( true, DataTable.ext.renderer, {
 			var btnDisplay, btnClass;
 
 			var attach = function( container, buttons ) {
-				var i, ien, node, button;
+				var i, ien, node, button, tabIndex;
 				var disabledClass = classes.sPageButtonDisabled;
 				var clickHandler = function ( e ) {
 					_fnPageChange( settings, e.data.action, true );
@@ -14824,10 +14796,9 @@ $.extend( true, DataTable.ext.renderer, {
 						attach( inner, button );
 					}
 					else {
-						var disabled = false;
-
 						btnDisplay = null;
 						btnClass = button;
+						tabIndex = settings.iTabIndex;
 
 						switch ( button ) {
 							case 'ellipsis':
@@ -14838,7 +14809,8 @@ $.extend( true, DataTable.ext.renderer, {
 								btnDisplay = lang.sFirst;
 
 								if ( page === 0 ) {
-									disabled = true;
+									tabIndex = -1;
+									btnClass += ' ' + disabledClass;
 								}
 								break;
 
@@ -14846,7 +14818,8 @@ $.extend( true, DataTable.ext.renderer, {
 								btnDisplay = lang.sPrevious;
 
 								if ( page === 0 ) {
-									disabled = true;
+									tabIndex = -1;
+									btnClass += ' ' + disabledClass;
 								}
 								break;
 
@@ -14854,7 +14827,8 @@ $.extend( true, DataTable.ext.renderer, {
 								btnDisplay = lang.sNext;
 
 								if ( pages === 0 || page === pages-1 ) {
-									disabled = true;
+									tabIndex = -1;
+									btnClass += ' ' + disabledClass;
 								}
 								break;
 
@@ -14862,7 +14836,8 @@ $.extend( true, DataTable.ext.renderer, {
 								btnDisplay = lang.sLast;
 
 								if ( pages === 0 || page === pages-1 ) {
-									disabled = true;
+									tabIndex = -1;
+									btnClass += ' ' + disabledClass;
 								}
 								break;
 
@@ -14875,10 +14850,8 @@ $.extend( true, DataTable.ext.renderer, {
 
 						if ( btnDisplay !== null ) {
 							var tag = settings.oInit.pagingTag || 'a';
-
-							if (disabled) {
-								btnClass += ' ' + disabledClass;
-							}
+							var disabled = btnClass.indexOf(disabledClass) !== -1;
+		
 
 							node = $('<'+tag+'>', {
 									'class': classes.sPageButton+' '+btnClass,
@@ -14888,7 +14861,7 @@ $.extend( true, DataTable.ext.renderer, {
 									'role': 'link',
 									'aria-current': btnClass === classes.sPageButtonActive ? 'page' : null,
 									'data-dt-idx': button,
-									'tabindex': disabled ? -1 : settings.iTabIndex,
+									'tabindex': tabIndex,
 									'id': idx === 0 && typeof button === 'string' ?
 										settings.sTableId +'_'+ button :
 										null
@@ -15105,7 +15078,7 @@ $.extend( _ext.type.order, {
 	// string
 	"string-pre": function ( a ) {
 		// This is a little complex, but faster than always calling toString,
-		// https://jsperf.com/tostring-v-check
+		// http://jsperf.com/tostring-v-check
 		return _empty(a) ?
 			'' :
 			typeof a === 'string' ?

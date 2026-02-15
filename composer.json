@@ -13,6 +13,16 @@
     "require-dev": {
         "phpunit/phpunit": "^10.1"
     },
+    "extra": {
+        "theme-config": {
+            "github_repo": "https://github.com/zuramai/mazer",
+            "tag": "v2.3.0",
+            "release_asset": "template.zip", 
+            "source_dir": "dist", 
+            "dest_dir": "webroot/mazer"
+        
+        }
+    },
     "autoload": {
         "psr-4": {
             "Mazer\\": "src/"
@@ -23,5 +33,8 @@
             "Mazer\\Test\\": "tests/",
             "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
         }
+    },
+    "scripts": {
+        "update-theme": "bin/update-assets"
     }
 }
